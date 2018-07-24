@@ -4,8 +4,13 @@ import {
     Text
 } from 'react-native'
 import Layout from '../components/suggestion-list-layout';
+import Empty from '../components/empty';
+import Separator from '../components/vertical-separator';
 
 class SuggestionsList extends Component{
+
+    renderEmpty = () => <Empty text="No hay sugerencias" />
+    itemSeparator = () => <Separator  />
 
     list = [];
 
@@ -13,12 +18,12 @@ class SuggestionsList extends Component{
         super(props);
         this.list = [
             {
-                title: 'leo',
-                key: '1'
+                title: 'Avengers',
+                key: 1
             },
             {
-                title: 'nidas',
-                key: '2'
+                title: 'Pokemon',
+                key: 2
             }
         ];
     }
@@ -29,7 +34,9 @@ class SuggestionsList extends Component{
             title="Recomendado para ti">
                 <FlatList
                 data={this.list}
-                renderItem ={({item}) => <Text>{item.title}</Text>}
+                ListEmptyComponent={ this.renderEmpty}
+                ItemSeparatorComponent={this.itemSeparator}
+                renderItem ={ ({item}) => <Text>{item.title}</Text>}
                 />
             </Layout>
         )
